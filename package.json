@@ -1,0 +1,7 @@
+{
+  "name": "swapi-graphql",
+  "scripts": {
+    "test": "echo \"This is a placeholder\" && exit 0"
+  },
+  "version": "1.0.0"
+}
