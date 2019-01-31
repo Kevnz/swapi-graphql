@@ -17,6 +17,7 @@
     "start": "node ./src/server/index.js"
   },
   "dependencies": {
+    "@sentry/node": "^4.5.3",
     "apollo-server-hapi": "^2.3.1",
     "bcrypt": "^3.0.3",
     "blipp": "^3.1.2",
