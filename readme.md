@@ -1,15 +1,12 @@
-# My Custom App
+# SWAPI GraphQL
 
 ```
 - docker
 - src
 -- server
---- models
---- public
---- routes
--- ui
---- core
---- features
+--- graphql
+---- schemas
+--- utils
 
 ```
 

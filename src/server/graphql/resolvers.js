@@ -1,3 +1,4 @@
+const DataLoader = require('dataloader')
 const swapi = require('../utils/swapi')
 const parser = url => {
   const p = url.split('/')
@@ -51,8 +52,11 @@ const filmMapper = film => {
     openingCrawl: film.opening_crawl,
     producer: film.producer,
     urls: {
+      planets: film.planets,
+      starships: film.starships,
       vehicles: film.vehicles,
       characters: film.characters,
+      species: film.species,
     },
   }
 }
@@ -116,38 +120,64 @@ const speciesMapper = species => {
     },
   }
 }
+const swapiLoader = new DataLoader(urls => {
+  console.log('swapiLoader URLS', urls)
+  return Promise.all(urls.map(swapi.get))
+})
+const loadAndMap = async (urls, mapper) => {
+  const items = await swapiLoader.loadMany(urls)
+  return items.map(mapper)
+}
+
+const planetsResolver = async (root, args, context, info) => {
+  return loadAndMap(root.urls.planets, planetMapper)
+}
+const vehiclesResolver = async (root, args, context, info) => {
+  return loadAndMap(root.urls.vehicles, vehicleMapper)
+}
+const starshipsResolver = async (root, args, context, info) =>
+  loadAndMap(root.urls.starships, starshipMapper)
+
+const speciesResolver = async (root, args, context, info) =>
+  loadAndMap(root.urls.species, speciesMapper)
+const charactersResolver = async (root, args, context, info) =>
+  loadAndMap(root.urls.characters, personMapper)
+const residentsResolver = async (root, args, context, info) =>
+  loadAndMap(root.urls.residents, personMapper)
+const pilotsResolver = async (root, args, context, info) =>
+  loadAndMap(root.urls.pilots, personMapper)
+const filmsResolver = async (root, args, context, info) =>
+  loadAndMap(root.urls.films, filmMapper)
+
 const resolvers = {
+  Film: {
+    planets: planetsResolver,
+    vehicles: vehiclesResolver,
+    starships: starshipsResolver,
+    species: speciesResolver,
+    characters: charactersResolver,
+  },
   Person: {
     homeworld: async (root, args, context, info) => {
-      const planet = await swapi.get(root.urls.homeworld)
+      const planet = await swapiLoader.load(root.urls.homeworld)
       return planetMapper(planet)
     },
-    vehicles: async (root, args, context, info) => {
-      const vs = await Promise.all(root.urls.vehicles.map(swapi.get))
-      return vs.map(vehicleMapper)
-    },
-    starships: async (root, args, context, info) => {
-      const fs = await Promise.all(root.urls.starships.map(swapi.get))
-      return fs.map(starshipMapper)
-    },
-    species: async (root, args, context, info) => {
-      const fs = await Promise.all(root.urls.species.map(swapi.get))
-      return fs.map(speciesMapper)
-    },
-    films: async (root, args, context, info) => {
-      const fs = await Promise.all(root.urls.films.map(swapi.get))
-      return fs.map(filmMapper)
-    },
+    vehicles: vehiclesResolver,
+    starships: starshipsResolver,
+    species: speciesResolver,
+    films: filmsResolver,
   },
   Planet: {
-    films: async (root, args, context, info) => {
-      const fs = await Promise.all(root.urls.films.map(swapi.get))
-      return fs.map(filmMapper)
-    },
-    residents: async (root, args, context, info) => {
-      const vs = await Promise.all(root.urls.residents.map(swapi.get))
-      return vs.map(personMapper)
-    },
+    films: filmsResolver,
+    residents: residentsResolver,
+  },
+  Vehicle: {
+    pilots: pilotsResolver,
+    films: filmsResolver,
+  },
+  Starship: {
+    pilots: pilotsResolver,
+    films: filmsResolver,
   },
   Query: {
     person: async (root, args, context, info) => {

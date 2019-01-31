@@ -8,5 +8,4 @@ type Film {
   vehicles: [Vehicle]
   starships: [Starship]
   species: [Species]
-  films: [Film]
 }
