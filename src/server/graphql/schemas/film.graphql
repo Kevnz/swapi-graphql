@@ -1,0 +1,12 @@
+type Film {
+  id: Int
+  episode: Int
+  title: String
+  openingCrawl: String
+  characters: [Person]
+  planets: [Planet]
+  vehicles: [Vehicle]
+  starships: [Starship]
+  species: [Species]
+  films: [Film]
+}

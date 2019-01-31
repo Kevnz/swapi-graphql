@@ -1,7 +1,45 @@
 {
   "name": "swapi-graphql",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"This is a placeholder\" && exit 0"
+    "docker:up": "docker-compose -f ./docker/dev/docker-compose.yml up",
+    "docker:down": "docker-compose -f ./docker/dev/docker-compose.yml down",
+    "dev:db": "npm run docker:up",
+    "dev:server": "nodemon ./src/server/index.js",
+    "test": "jest --config=jest.config.js --detectOpenHandles --forceExit --testPathPattern='(src).*(__tests__).*.test.js'",
+    "lint": "eslint ./src",
+    "watch": "npm-run-all --parallel dev:**",
+    "migrate:up": "knex migrate:latest",
+    "migrate:down": "knex migrate:rollback",
+    "migrate:create": "typesetter migrate",
+    "model": "typesetter model"
   },
-  "version": "1.0.0"
+  "dependencies": {
+    "apollo-server-hapi": "^2.3.1",
+    "bcrypt": "^3.0.3",
+    "blipp": "^3.1.2",
+    "bookshelf": "^0.14.2",
+    "good": "^8.1.2",
+    "good-console": "^7.1.0",
+    "graphql": "^14.1.1",
+    "hapi": "^18.0.0",
+    "hapi-cors-headers": "^1.0.3",
+    "hapi-router": "^4.0.0",
+    "inert": "^5.1.2",
+    "jsonwebtoken": "^8.4.0",
+    "knex": "^0.16.3",
+    "pg": "^7.8.0",
+    "r2": "^2.0.1",
+    "vision": "^5.4.4",
+    "xtconf": "^4.0.0"
+  },
+  "devDependencies": {
+    "@kev_nz/eslint-config": "^3.0.1",
+    "@lifeomic/json-schema-to-graphql-types": "^1.0.1",
+    "eslint": "^5.12.1",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
+    "typesetter": "^2.0.0"
+  }
 }

@@ -1,0 +1,83 @@
+{
+  "required": [
+    "name",
+    "rotation_period",
+    "orbital_period",
+    "diameter",
+    "climate",
+    "gravity",
+    "terrain",
+    "surface_water",
+    "population",
+    "residents",
+    "films",
+    "created",
+    "edited",
+    "url"
+  ],
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "properties": {
+    "diameter": {
+      "type": "string",
+      "description": "The diameter of this planet in kilometers."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The hypermedia URL of this resource."
+    },
+    "population": {
+      "type": "string",
+      "description": "The average populationof sentient beings inhabiting this planet."
+    },
+    "residents": {
+      "type": "array",
+      "description": "An array of People URL Resources that live on this planet."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of this planet."
+    },
+    "terrain": {
+      "type": "string",
+      "description": "the terrain of this planet. Comma-seperated if diverse."
+    },
+    "films": {
+      "type": "array",
+      "description": "An array of Film URL Resources that this planet has appeared in."
+    },
+    "orbital_period": {
+      "type": "string",
+      "description": "The number of standard days it takes for this planet to complete a single orbit of its local star."
+    },
+    "edited": {
+      "type": "string",
+      "format": "date-time",
+      "description": "the ISO 8601 date format of the time that this resource was edited."
+    },
+    "climate": {
+      "type": "string",
+      "description": "The climate of this planet. Comma-seperated if diverse."
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The ISO 8601 date format of the time that this resource was created."
+    },
+    "rotation_period": {
+      "type": "string",
+      "description": "The number of standard hours it takes for this planet to complete a single rotation on its axis."
+    },
+    "surface_water": {
+      "type": "string",
+      "description": "The percentage of the planet surface that is naturally occuring water or bodies of water."
+    },
+    "gravity": {
+      "type": "string",
+      "description": "A number denoting the gravity of this planet. Where 1 is normal."
+    }
+  },
+  "type": "object",
+  "description": "A planet.",
+  "title": "Planet"
+}

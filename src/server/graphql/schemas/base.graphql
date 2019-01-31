@@ -1,0 +1,8 @@
+type Query {
+  person(id: ID): Person
+  planet(id: ID): Planet
+  species(id: ID): Species
+  vehicle(id: ID): Vehicle
+  film(id: ID): Film
+  starship(id: ID): Starship
+}

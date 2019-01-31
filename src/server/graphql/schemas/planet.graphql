@@ -1,0 +1,14 @@
+type Planet {
+  id: Int
+  name: String
+  diameter: String
+  population: String
+  terrain: String
+  orbitalPeriod: String
+  climate: String
+  rotationPeriod: String
+  surfaceWater: String
+  gravity: String
+  residents: [Person]
+  films: [Film]
+}

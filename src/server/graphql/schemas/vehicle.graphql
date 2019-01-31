@@ -1,0 +1,15 @@
+type Vehicle {
+  id: Int
+  name: String
+  model: String
+  manufacturer: String
+  cost_in_credits: String
+  length: String
+  max_atmosphering_speed: String
+  crew: String
+  consumables: String
+  passengers: String
+  vehicle_class: String
+  cargo_capacity: String
+  pilots: [Person]
+}

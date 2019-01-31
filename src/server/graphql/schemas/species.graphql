@@ -1,0 +1,15 @@
+type Species {
+  id: Int
+  name: String
+  skin_colors: String
+  average_lifespan: String
+  average_height: String
+  designation: String
+  eye_colors: String
+  classification: String
+  hair_colors: String
+  language: String
+  people: [Person]
+  homeworld: Planet
+  films: [Film]
+}
