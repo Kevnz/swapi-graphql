@@ -120,10 +120,9 @@ const speciesMapper = species => {
     },
   }
 }
-const swapiLoader = new DataLoader(urls => {
-  console.log('swapiLoader URLS', urls)
-  return Promise.all(urls.map(swapi.get))
-})
+
+const swapiLoader = new DataLoader(urls => Promise.all(urls.map(swapi.get)))
+
 const loadAndMap = async (urls, mapper) => {
   const items = await swapiLoader.loadMany(urls)
   return items.map(mapper)
