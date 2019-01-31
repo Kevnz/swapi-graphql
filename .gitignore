@@ -3,4 +3,4 @@ dist
 .cache
 .DS_Store
 *.log
-
+config/config.production.json
