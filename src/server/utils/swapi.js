@@ -1,5 +1,5 @@
 const r2 = require('r2')
-
+const Redis = require('ioredis')
 const base = 'https://swapi.co/api/'
 const people = 'people/'
 const planets = 'planets/'
@@ -7,50 +7,30 @@ const starships = 'starships/'
 const films = 'films/'
 const species = 'species/'
 const vehicles = 'vehicles/'
+const redisConfig = {
+  port: process.env.REDIS_PORT,
+  host: process.env.REDIS_HOST,
+}
+if (process.env.REDIS_PASSWORD) {
+  redisConfig.password = process.env.REDIS_PASSWORD
+}
 
+const redis = new Redis(redisConfig)
+
+const get = async url => {
+  const fromCache = await redis.get(url)
+  if (fromCache !== null) return JSON.parse(fromCache)
+
+  const resp = await r2.get(url).json
+  await redis.set(url, JSON.stringify(resp))
+  return resp
+}
 module.exports = {
-  get: async url => {
-    console.log('get a person')
-    let obj = { ok: true }
-    const resp = await r2.get(url).json
-    console.info('get response', resp)
-    return resp
-  },
-  people: async id => {
-    console.log('get a person')
-    let obj = { ok: true }
-    const resp = await r2.get(`${base}${people}${id}/`).json
-    console.info('people response', resp)
-    return resp
-  },
-  planets: async id => {
-    let obj = { ok: true }
-    const resp = await r2.get(`${base}${planets}${id}/`).json
-    console.info('planets response', resp)
-    return resp
-  },
-  starships: async id => {
-    let obj = { ok: true }
-    const resp = await r2.get(`${base}${starships}${id}/`).json
-    console.info('starships response', resp)
-    return resp
-  },
-  films: async id => {
-    let obj = { ok: true }
-    const resp = await r2.get(`${base}${films}${id}/`).json
-    console.info('films response', resp)
-    return resp
-  },
-  species: async id => {
-    let obj = { ok: true }
-    const resp = await r2.get(`${base}${species}${id}/`).json
-    console.info('species response', resp)
-    return resp
-  },
-  vehicles: async id => {
-    let obj = { ok: true }
-    const resp = await r2.get(`${base}${vehicles}${id}/`).json
-    console.info('vehicles response', resp)
-    return resp
-  },
+  get,
+  people: async id => get(`${base}${people}${id}/`),
+  planets: async id => get(`${base}${planets}${id}/`),
+  starships: async id => get(`${base}${starships}${id}/`),
+  films: async id => get(`${base}${films}${id}/`),
+  species: async id => get(`${base}${species}${id}/`),
+  vehicles: async id => get(`${base}${vehicles}${id}/`),
 }

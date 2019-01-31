@@ -12,4 +12,5 @@ type Vehicle {
   vehicle_class: String
   cargo_capacity: String
   pilots: [Person]
+  films: [Film]
 }
