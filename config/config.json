@@ -17,11 +17,5 @@
   },
   "app": {
     "secret": "the app secret so change it"
-  },
-  "redis": {
-    "url": "localhost:6379",
-    "port": 6379,
-    "host": "localhost",
-    "password": ""
   }
 }
