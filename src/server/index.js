@@ -9,7 +9,12 @@ let app
 
 const start = async () => {
   try {
-    const server = new ApolloServer({ typeDefs: Types, resolvers: Resolvers })
+    const server = new ApolloServer({
+      typeDefs: Types,
+      resolvers: Resolvers,
+      introspection: true,
+      playground: true,
+    })
     app = Hapi.server({
       port: process.env.PORT,
       routes: {
