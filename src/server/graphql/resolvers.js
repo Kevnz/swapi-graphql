@@ -180,23 +180,39 @@ const resolvers = {
   },
   Query: {
     person: async (root, args, context, info) => {
+      console.log('person query', args)
       const person = await swapi.people(args.id)
-      return personMapper(person)
+      if (args.id === null) {
+        return person.map(personMapper)
+      }
+      return [personMapper(person)]
     },
     planet: async (root, args, context, info) => {
-      const person = await swapi.planets(args.id)
-      return planetMapper(person)
+      const planet = await swapi.planets(args.id)
+      if (args.id === null) {
+        return planet.map(planetMapper)
+      }
+      return planetMapper(planet)
     },
     vehicle: async (root, args, context, info) => {
       const vehicle = await swapi.vehicle(args.id)
+      if (args.id === null) {
+        return vehicle.map(vehicleMapper)
+      }
       return vehicleMapper(vehicle)
     },
     starship: async (root, args, context, info) => {
       const starship = await swapi.starship(args.id)
+      if (args.id === null) {
+        return starship.map(starshipMapper)
+      }
       return starshipMapper(starship)
     },
     film: async (root, args, context, info) => {
       const film = await swapi.films(args.id)
+      if (args.id === null) {
+        return film.map(filmMapper)
+      }
       return filmMapper(film)
     },
   },
