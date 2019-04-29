@@ -1,6 +1,8 @@
 const path = require('path')
 
+const { env } = process
 module.exports = {
+  mode: env.NODE_ENV,
   entry: './src/ui/index.js',
   module: {
     rules: [
@@ -22,18 +24,16 @@ module.exports = {
   resolve: {
     extensions: ['*', '.mjs', '.js', '.jsx'],
     modules: ['node_modules', 'src'],
-    alias: {
-      '_variables.sass': path.resolve(
-        __dirname,
-        '../',
-        'ui',
-        '_variables.sass'
-      ),
-    },
+    alias: {},
   },
+  output: {
+    filename: '[name].js',
+  },
+  /*
   output: {
     path: path.join(__dirname, '/dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
+  */
 }
