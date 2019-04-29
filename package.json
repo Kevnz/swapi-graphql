@@ -5,6 +5,7 @@
   "scripts": {
     "docker:up": "docker-compose -f ./docker/dev/docker-compose.yml up redis",
     "docker:down": "docker-compose -f ./docker/dev/docker-compose.yml down",
+    "build": "webpack --config ./src/webpack/prod.config.js --mode production",
     "dev:server": "nodemon ./src/server/index.js",
     "dev:ui": "cross-env NODE_ENV=development webpack-dev-server --config ./src/webpack/dev.config.js --hot ",
     "test": "jest --config=jest.config.js --detectOpenHandles --forceExit --testPathPattern='(src).*(__tests__).*.test.js'",
@@ -35,11 +36,13 @@
     "good": "^8.1.2",
     "good-console": "^7.1.0",
     "graphql": "^14.1.1",
+    "graphql-request": "^1.8.2",
     "hapi": "^18.1.0",
     "hapi-cors-headers": "^1.0.3",
     "hapi-router": "^4.0.0",
     "inert": "^5.1.2",
     "ioredis": "^4.6.2",
+    "isom": "^0.4.1",
     "jsonwebtoken": "^8.4.0",
     "knex": "^0.16.3",
     "pg": "^7.8.0",
@@ -63,6 +66,10 @@
     "@babel/preset-react": "^7.0.0",
     "@kev_nz/eslint-config": "^3.0.1",
     "@lifeomic/json-schema-to-graphql-types": "^1.0.1",
+    "@storybook/addon-actions": "^4.1.11",
+    "@storybook/addon-links": "^4.1.11",
+    "@storybook/addons": "^4.1.11",
+    "@storybook/react": "^4.1.11",
     "asciify": "^1.3.5",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
@@ -83,10 +90,6 @@
     "typesetter": "^2.0.0",
     "webpack": "^4.29.2",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14",
-    "@storybook/react": "^4.1.11",
-    "@storybook/addon-actions": "^4.1.11",
-    "@storybook/addon-links": "^4.1.11",
-    "@storybook/addons": "^4.1.11"
+    "webpack-dev-server": "^3.1.14"
   }
 }
