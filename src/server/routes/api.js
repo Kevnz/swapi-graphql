@@ -173,14 +173,28 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/api/films/{id}',
+    path: '/api/films/{id?}',
     config: {
       handler: async (request, h) => {
+        console.log(request.params)
         const film = await swapi.films(request.params.id)
-        if (request.params.id === null) {
+
+        if (request.params.id === undefined) {
           return film.map(filmMapper)
         }
         return [filmMapper(film)]
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/films/{id}/vehicles',
+    config: {
+      handler: async (request, h) => {
+        console.log(request.params)
+        const film = await swapi.films(request.params.id)
+        const mappedFilm = filmMapper(film)
+        return vehiclesResolver(mappedFilm)
       },
     },
   },
