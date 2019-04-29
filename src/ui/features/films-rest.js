@@ -4,7 +4,7 @@ import Film from '../components/film'
 
 const Films = () => {
   const [id, setId] = useState(1)
-  const { data, loading, error } = useGet(`/api/films/${id}`)
+  const { data, loading, error } = useGet(`/api/films`)
 
   if (loading) {
     return <div>Loading</div>
