@@ -1,9 +1,7 @@
 const DataLoader = require('dataloader')
 const swapi = require('../utils/swapi')
 const parser = url => {
-  console.log('parse url', url)
   const p = url.split('/')
-  console.log('pb', p)
   p.pop()
   return p.pop()
 }
