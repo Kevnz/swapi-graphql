@@ -1,0 +1,23 @@
+{
+  "docker:up": "docker-compose -f ./docker/dev/docker-compose.yml up redis",
+  "docker:down": "docker-compose -f ./docker/dev/docker-compose.yml down",
+  "predev": [
+    "docker-compose -f ./docker/dev/docker-compose.yml up --detach",
+    "node ./src/scripts/delay.js"
+  ],
+  "dev": [
+    "cross-env NODE_ENV=development webpack-dev-server --config ./src/webpack/dev.config.js --hot ",
+    "nodemon ./src/server/index.js"
+  ],
+  "test": "jest --config=jest.config.js --detectOpenHandles --forceExit --testPathPattern='(src).*(__tests__).*.test.js'",
+  "lint": "eslint ./src",
+  "watch": "npm-run-all --parallel dev:**",
+  "migrate:up": "knex migrate:latest",
+  "migrate:down": "knex migrate:rollback",
+  "migrate:create": "typesetter migrate",
+  "model": "typesetter model",
+  "prestart": "webpack --config ./src/webpack/prod.config.js --mode production",
+  "start": "node ./src/server/index.js",
+  "storybook": "start-storybook -p 6006",
+  "build-storybook": "build-storybook"
+}
