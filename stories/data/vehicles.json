@@ -1,0 +1,22 @@
+[
+  {
+    "cargoCapacity": "50000",
+    "consumables": "2 months",
+    "costInCredits": "150000",
+    "created": "2014-12-10T15:36:25.724000Z",
+    "crew": "46",
+    "edited": "2014-12-10T15:36:25.724000Z",
+    "length": "36.8",
+    "manufacturer": "Corellia Mining Corporation",
+    "maxAtmospheringSpeed": "30",
+    "model": "Digger Crawler",
+    "name": "Sand Crawler",
+    "passengers": "30",
+    "pilots": [],
+    "films": [
+      "https://swapi.co/api/films/1/"
+    ],
+    "url": "https://swapi.co/api/vehicles/4/",
+    "vehicleClass": "wheeled"
+  }
+]
