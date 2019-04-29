@@ -56,6 +56,7 @@ const filmMapper = film => {
     title: film.title,
     openingCrawl: film.opening_crawl,
     producer: film.producer,
+    director: film.director,
     urls: {
       planets: film.planets,
       starships: film.starships,
@@ -159,7 +160,7 @@ const filmsResolver = async (root, args, context, info) =>
 module.exports = [
   {
     method: 'GET',
-    path: '/characters/{id}',
+    path: '/api/characters/{id}',
     config: {
       handler: async (request, h) => {
         const person = await swapi.people(request.params.id)
@@ -172,7 +173,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/films/{id}',
+    path: '/api/films/{id}',
     config: {
       handler: async (request, h) => {
         const film = await swapi.films(request.params.id)
@@ -185,7 +186,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/planets/{id}',
+    path: '/api/planets/{id}',
     config: {
       handler: async (request, h) => {
         const planet = await swapi.planets(request.params.id)
@@ -198,7 +199,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/vehicles/{id}',
+    path: '/api/vehicles/{id}',
     config: {
       handler: async (request, h) => {
         const vehicle = await swapi.vehicles(request.params.id)
@@ -211,7 +212,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/starships/{id}',
+    path: '/api/starships/{id}',
     config: {
       handler: async (request, h) => {
         const starship = await swapi.starships(request.params.id)
