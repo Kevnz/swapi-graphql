@@ -105,6 +105,7 @@ module.exports = {
     return get(`${base}species/${id}/`)
   },
   vehicles: async id => {
+    console.log('vehicle id', id)
     if (id == null) {
       const pages = Array(4)
         .fill(0)
