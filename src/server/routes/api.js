@@ -1,13 +1,11 @@
 const DataLoader = require('dataloader')
 const swapi = require('../utils/swapi')
 const parser = url => {
+  console.log('parse url', url)
   const p = url.split('/')
+  console.log('pb', p)
   p.pop()
   return p.pop()
-}
-const nullCheck = (entity, mapper) => {
-  if (entity.url) return
-  return mapper(entity)
 }
 const personMapper = person => {
   if (!person.url) return
@@ -58,6 +56,7 @@ const filmMapper = film => {
     title: film.title,
     openingCrawl: film.opening_crawl,
     producer: film.producer,
+    director: film.director,
     urls: {
       planets: film.planets,
       starships: film.starships,
@@ -158,73 +157,84 @@ const pilotsResolver = async (root, args, context, info) =>
 const filmsResolver = async (root, args, context, info) =>
   loadAndMap(root.urls.films, filmMapper)
 
-const resolvers = {
-  Film: {
-    planets: planetsResolver,
-    vehicles: vehiclesResolver,
-    starships: starshipsResolver,
-    species: speciesResolver,
-    characters: charactersResolver,
-  },
-  Person: {
-    homeworld: async (root, args, context, info) => {
-      const planet = await swapiLoader.load(root.urls.homeworld)
-      return planetMapper(planet)
-    },
-    vehicles: vehiclesResolver,
-    starships: starshipsResolver,
-    species: speciesResolver,
-    films: filmsResolver,
-  },
-  Planet: {
-    films: filmsResolver,
-    residents: residentsResolver,
-  },
-  Vehicle: {
-    pilots: pilotsResolver,
-    films: filmsResolver,
-  },
-  Starship: {
-    pilots: pilotsResolver,
-    films: filmsResolver,
-  },
-  Query: {
-    person: async (root, args, context, info) => {
-      const person = await swapi.people(args.id)
-      if (args.id === null) {
-        return person.map(personMapper)
-      }
-      return [personMapper(person)]
-    },
-    planet: async (root, args, context, info) => {
-      const planet = await swapi.planets(args.id)
-      if (args.id === null) {
-        return planet.map(planetMapper)
-      }
-      return [planetMapper(planet)]
-    },
-    vehicle: async (root, args, context, info) => {
-      const vehicle = await swapi.vehicles(args.id)
-      if (args.id === null) {
-        return vehicle.map(vehicleMapper)
-      }
-      return [vehicleMapper(vehicle)]
-    },
-    starship: async (root, args, context, info) => {
-      const starship = await swapi.starship(args.id)
-      if (args.id === null) {
-        return starship.map(starshipMapper)
-      }
-      return [starshipMapper(starship)]
-    },
-    film: async (root, args, context, info) => {
-      const film = await swapi.films(args.id)
-      if (args.id === null) {
-        return film.map(filmMapper)
-      }
-      return [filmMapper(film)]
+module.exports = [
+  {
+    method: 'GET',
+    path: '/api/characters/{id}',
+    config: {
+      handler: async (request, h) => {
+        const person = await swapi.people(request.params.id)
+        if (request.params.id === null) {
+          return person.map(personMapper)
+        }
+        return [personMapper(person)]
+      },
     },
   },
-}
+  {
+    method: 'GET',
+    path: '/api/films/{id?}',
+    config: {
+      handler: async (request, h) => {
+        console.log(request.params)
+        const film = await swapi.films(request.params.id)
 
-module.exports = resolvers
+        if (request.params.id === undefined) {
+          return film.map(filmMapper)
+        }
+        return [filmMapper(film)]
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/films/{id}/vehicles',
+    config: {
+      handler: async (request, h) => {
+        console.log(request.params)
+        const film = await swapi.films(request.params.id)
+        const mappedFilm = filmMapper(film)
+        return vehiclesResolver(mappedFilm)
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/planets/{id}',
+    config: {
+      handler: async (request, h) => {
+        const planet = await swapi.planets(request.params.id)
+        if (request.params.id === null) {
+          return planet.map(planetMapper)
+        }
+        return [planetMapper(planet)]
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/vehicles/{id}',
+    config: {
+      handler: async (request, h) => {
+        const vehicle = await swapi.vehicles(request.params.id)
+        if (request.params.id === null) {
+          return vehicle.map(vehicleMapper)
+        }
+        return [vehicleMapper(vehicle)]
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/starships/{id}',
+    config: {
+      handler: async (request, h) => {
+        const starship = await swapi.starships(request.params.id)
+        if (request.params.id === null) {
+          return starship.map(starshipMapper)
+        }
+        return [starshipMapper(starship)]
+      },
+    },
+  },
+]

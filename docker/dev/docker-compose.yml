@@ -1,13 +1,6 @@
 version: '3'
 
 services:
-  pgdb:
-    image: postgres:9.6.6-alpine
-    environment:
-      POSTGRES_USER: dbuser
-      POSTGRES_PASSWORD: dbpassword_password
-    ports:
-      - "5432:5432"
   redis:
     image: redis:4
     ports:

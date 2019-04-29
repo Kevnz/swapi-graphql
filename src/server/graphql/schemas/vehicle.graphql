@@ -3,14 +3,14 @@ type Vehicle {
   name: String
   model: String
   manufacturer: String
-  cost_in_credits: String
+  costInCredits: String
   length: String
-  max_atmosphering_speed: String
+  maxAtmospheringSpeed: String
   crew: String
   consumables: String
   passengers: String
-  vehicle_class: String
-  cargo_capacity: String
+  vehicleClass: String
+  cargoCapacity: String
   pilots: [Person]
   films: [Film]
 }

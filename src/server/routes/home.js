@@ -1,9 +1,11 @@
-module.exports = [{
-  method: 'GET',
-  path: '/',
-  config: {
-    handler: (request, h) => {
-      return 'API'
-    }
-  }
-}]
+module.exports = [
+  {
+    method: 'GET',
+    path: '/scrap',
+    config: {
+      handler: (request, h) => {
+        return h.redirect('/graphql')
+      },
+    },
+  },
+]

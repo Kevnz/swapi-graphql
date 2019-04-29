@@ -1,0 +1,24 @@
+[
+  {
+    "MGLT": "10 MGLT",
+    "cargoCapacity": "1000000000000",
+    "consumables": "3 years",
+    "costInCredits": "1000000000000",
+    "created": "2014-12-10T16:36:50.509000Z",
+    "crew": "342953",
+    "edited": "2014-12-10T16:36:50.509000Z",
+    "hyperdriveRating": "4.0",
+    "length": "120000",
+    "manufacturer": "Imperial Department of Military Research, Sienar Fleet Systems",
+    "maxAtmospheringSpeed": "n/a",
+    "model": "DS-1 Orbital Battle Station",
+    "name": "Death Star",
+    "passengers": "843342",
+    "films": [
+      "https://swapi.co/api/films/1/"
+    ],
+    "pilots": [],
+    "starshipClass": "Deep Space Mobile Battlestation",
+    "url": "https://swapi.co/api/starships/9/"
+  }
+]

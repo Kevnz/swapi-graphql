@@ -1,7 +1,12 @@
+const PORT = process.env.PORT
 require('xtconf')()
 const Path = require('path')
 const { ApolloServer } = require('apollo-server-hapi')
 const Hapi = require('hapi')
+const Sentry = require('@sentry/node')
+
+Sentry.init({ dsn: process.env.SENTRY })
+
 const Manifest = require('./manifest')
 const Types = require('./graphql/types')
 const Resolvers = require('./graphql/resolvers')
@@ -9,9 +14,14 @@ let app
 
 const start = async () => {
   try {
-    const server = new ApolloServer({ typeDefs: Types, resolvers: Resolvers })
+    const server = new ApolloServer({
+      typeDefs: Types,
+      resolvers: Resolvers,
+      introspection: true,
+      playground: true,
+    })
     app = Hapi.server({
-      port: process.env.PORT,
+      port: PORT || process.env.PORT,
       routes: {
         files: {
           relativeTo: Path.join(__dirname, 'public'),
