@@ -16,7 +16,7 @@
   "migrate:down": "knex migrate:rollback",
   "migrate:create": "typesetter migrate",
   "model": "typesetter model",
-  "prestart": "webpack --config ./src/webpack/prod.config.js --mode production",
+  "build": "webpack --config ./src/webpack/prod.config.js --mode production",
   "start": "node ./src/server/index.js",
   "storybook": "start-storybook -p 6006",
   "build-storybook": "build-storybook"
