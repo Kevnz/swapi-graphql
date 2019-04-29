@@ -1,7 +1,7 @@
 module.exports = [
   {
     method: 'GET',
-    path: '/',
+    path: '/scrap',
     config: {
       handler: (request, h) => {
         return h.redirect('/graphql')
