@@ -11,9 +11,11 @@ const devConfig = {
   ],
   devtool: 'cheap-module-eval-source-map',
   devServer: {
+    historyApiFallback: true,
     hot: true,
     proxy: {
-      '/graphql': 'http://localhost:4567/',
+      '/graphql': 'http://localhost:4545/',
+      '/api': 'http://localhost:4545/',
     },
   },
 }
