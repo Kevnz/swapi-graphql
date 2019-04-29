@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import useQuery from '../tools/use-graphql'
 import Film from '../components/film'
 import Vehicle from '../components/vehicle'
 const Films = () => {
-  const { data } = useQuery(
-    'http://localhost:4567/graphql',
+  const { data, loading, error } = useQuery(
     `{
       film(id: null) {
         title
@@ -21,7 +20,17 @@ const Films = () => {
     {},
     { data: { film: [] } }
   )
+
   console.log('render data', data)
+
+  if (loading) {
+    return <div>Loading</div>
+  }
+
+  if (error) {
+    return <div>Error</div>
+  }
+
   const films = data.film
     .sort((a, b) => {
       return a.episode > b.episode ? 1 : -1
