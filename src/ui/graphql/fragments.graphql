@@ -1,0 +1,17 @@
+fragment personBase on Person {
+  id
+  name
+  height
+  hairColor
+  mass
+  eyeColor
+  skinColor
+  gender
+}
+
+fragment filmBase on Film {
+  title
+  episode
+  openingCrawl
+}
+
