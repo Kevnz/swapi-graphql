@@ -1,5 +1,7 @@
 const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 const baseConfig = require('./config')
 const prodConfig = {
   plugins: [
@@ -8,6 +10,12 @@ const prodConfig = {
       template: './src/ui/index.html',
       historyApiFallback: true,
     }),
+    new CopyPlugin([
+      {
+        from: path.join(process.cwd(), '/src/public'),
+        to: path.join(process.cwd(), '/dist'),
+      },
+    ]),
   ],
   output: {
     path: path.join(process.cwd(), '/dist'),
