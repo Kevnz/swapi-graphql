@@ -1,13 +1,13 @@
 type Species {
   id: Int
   name: String
-  skin_colors: String
-  average_lifespan: String
-  average_height: String
+  skinColors: String
+  averageLifespan: String
+  averageHeight: String
   designation: String
-  eye_colors: String
+  eyeColors: String
   classification: String
-  hair_colors: String
+  hairColors: String
   language: String
   people: [Person]
   homeworld: Planet
