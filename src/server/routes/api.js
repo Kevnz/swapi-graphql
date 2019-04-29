@@ -170,4 +170,56 @@ module.exports = [
       },
     },
   },
+  {
+    method: 'GET',
+    path: '/films/{id}',
+    config: {
+      handler: async (request, h) => {
+        const film = await swapi.films(request.params.id)
+        if (request.params.id === null) {
+          return film.map(filmMapper)
+        }
+        return [filmMapper(film)]
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/planets/{id}',
+    config: {
+      handler: async (request, h) => {
+        const planet = await swapi.planets(request.params.id)
+        if (request.params.id === null) {
+          return planet.map(planetMapper)
+        }
+        return [planetMapper(planet)]
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/vehicles/{id}',
+    config: {
+      handler: async (request, h) => {
+        const vehicle = await swapi.vehicles(request.params.id)
+        if (request.params.id === null) {
+          return vehicle.map(vehicleMapper)
+        }
+        return [vehicleMapper(vehicle)]
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/starships/{id}',
+    config: {
+      handler: async (request, h) => {
+        const starship = await swapi.starships(request.params.id)
+        if (request.params.id === null) {
+          return starship.map(starshipMapper)
+        }
+        return [starshipMapper(starship)]
+      },
+    },
+  },
 ]
