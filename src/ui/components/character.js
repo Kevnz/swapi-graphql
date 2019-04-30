@@ -1,10 +1,12 @@
 import React from 'react'
 
-export default function Character({ name, birthYear }) {
+export default function Character({ name, birthYear, homeworld, ...o }) {
   return (
-    <div>
+    <div className="spaced">
       <h3>{name}</h3>
-      <span>{birthYear}</span>
+      <p>
+        Born {birthYear} on {homeworld.name}{' '}
+      </p>
     </div>
   )
 }
