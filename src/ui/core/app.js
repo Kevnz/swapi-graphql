@@ -25,6 +25,9 @@ export default () => {
         <NavLink to="/films" className="button">
           Films
         </NavLink>
+        <NavLink to="/characters" className="button">
+          Characters
+        </NavLink>
         <NavLink to="/films-at-rest" className="button">
           Rest API Films
         </NavLink>
