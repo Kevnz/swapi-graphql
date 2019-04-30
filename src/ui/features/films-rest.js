@@ -7,7 +7,12 @@ const Films = () => {
   const { data, loading, error } = useGet(`/api/films`)
 
   if (loading) {
-    return <div>Loading</div>
+    return (
+      <div>
+        <p>Loading</p>
+        <span className="loader loader-xl" />
+      </div>
+    )
   }
 
   if (error) {
