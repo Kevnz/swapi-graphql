@@ -3,14 +3,14 @@
 }
 
 body {
-  border-top: 0.6rem solid #1f8dd6;
+  border-top: 0.8rem solid #1f8dd6;
 }
 
 a.button {
   margin-right: 1rem;
 }
 
-.spaced {
+.spaced, main {
   margin-top: 1rem;
 
 }
