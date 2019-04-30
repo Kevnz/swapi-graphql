@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Vehicle({ name, manufacturer, model }) {
   return (
-    <div>
+    <div className="spaced">
       <h3>
         {manufacturer} {name}
       </h3>
