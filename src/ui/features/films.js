@@ -24,7 +24,12 @@ const Films = () => {
   console.log('render data', data)
 
   if (loading) {
-    return <div>Loading</div>
+    return (
+      <div>
+        <p>Loading</p>
+        <span className="loader loader-xl" />
+      </div>
+    )
   }
 
   if (error) {
