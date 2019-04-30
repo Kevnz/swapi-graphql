@@ -1,18 +1,13 @@
 import React, { useState } from 'react'
 import useGet from '../tools/use-get'
 import Film from '../components/film'
-
+import Loading from '../components/loading'
 const Films = () => {
   const [id, setId] = useState(1)
   const { data, loading, error } = useGet(`/api/films`)
 
   if (loading) {
-    return (
-      <div>
-        <p>Loading</p>
-        <span className="loader loader-xl" />
-      </div>
-    )
+    return <Loading />
   }
 
   if (error) {
@@ -28,8 +23,7 @@ const Films = () => {
     })
   return (
     <main>
-      <h1>About the Star Wars API</h1>
-      <p>The Star Wars API via GraphQL</p>
+      <h3>Films from the Star Wars API</h3>
       {films}
     </main>
   )

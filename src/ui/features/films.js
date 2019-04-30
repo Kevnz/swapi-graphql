@@ -2,6 +2,7 @@ import React from 'react'
 import useQuery from '../tools/use-graphql'
 import Film from '../components/film'
 import Vehicle from '../components/vehicle'
+import Loading from '../components/loading'
 const Films = () => {
   const { data, loading, error } = useQuery(
     `{
@@ -24,12 +25,7 @@ const Films = () => {
   console.log('render data', data)
 
   if (loading) {
-    return (
-      <div>
-        <p>Loading</p>
-        <span className="loader loader-xl" />
-      </div>
-    )
+    return <Loading />
   }
 
   if (error) {
@@ -53,8 +49,7 @@ const Films = () => {
     })
   return (
     <main>
-      <h1>About the Star Wars API</h1>
-      <p>The Star Wars API via GraphQL</p>
+      <h3>Films from the Star Wars API</h3>
       {films}
     </main>
   )
