@@ -24,7 +24,7 @@ const start = async () => {
       port: PORT || process.env.PORT,
       routes: {
         files: {
-          relativeTo: Path.join(__dirname, 'public'),
+          relativeTo: Path.join(process.cwd(), 'dist'),
         },
         cors: {
           origin: ['*'],
@@ -33,6 +33,12 @@ const start = async () => {
       },
     })
     await app.register(Manifest)
+    app.ext('onPreResponse', function(request, h) {
+      if (request.response.isBoom) {
+        return h.file('index.html')
+      }
+      return h.continue
+    })
     await server.applyMiddleware({
       app,
     })
