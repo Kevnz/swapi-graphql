@@ -2,4 +2,5 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './core/app'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const cont = document.getElementById('root')
+ReactDOM.render(<App />, cont)
