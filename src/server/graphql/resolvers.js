@@ -1,5 +1,6 @@
 const DataLoader = require('dataloader')
 const swapi = require('../utils/swapi')
+const ga = require('../utils/ga')
 const parser = url => {
   const p = url.split('/')
   p.pop()
@@ -225,6 +226,7 @@ const resolvers = {
   },
   Query: {
     person: async (root, args, context, info) => {
+      ga('GraphQL Query', 'Person GraphQL Query')
       const person = await swapi.people(args.id)
       if (args.id === null) {
         return person.map(personMapper)
@@ -232,6 +234,7 @@ const resolvers = {
       return [personMapper(person)]
     },
     planet: async (root, args, context, info) => {
+      ga('GraphQL Query', 'Planet GraphQL Query')
       const planet = await swapi.planets(args.id)
       if (args.id === null) {
         return planet.map(planetMapper)
@@ -239,6 +242,7 @@ const resolvers = {
       return [planetMapper(planet)]
     },
     vehicle: async (root, args, context, info) => {
+      ga('GraphQL Query', 'Vehicle GraphQL Query')
       const vehicle = await swapi.vehicles(args.id)
       if (args.id === null) {
         return vehicle.map(vehicleMapper)
@@ -246,6 +250,7 @@ const resolvers = {
       return [vehicleMapper(vehicle)]
     },
     starship: async (root, args, context, info) => {
+      ga('GraphQL Query', 'Starship GraphQL Query')
       const starship = await swapi.starships(args.id)
       if (args.id === null) {
         return starship.map(starshipMapper)
@@ -253,6 +258,7 @@ const resolvers = {
       return [starshipMapper(starship)]
     },
     species: async (root, args, context, info) => {
+      ga('GraphQL Query', 'Species GraphQL Query')
       const species = await swapi.species(args.id)
       if (args.id === null) {
         return species.map(speciesMapper)
@@ -260,6 +266,7 @@ const resolvers = {
       return [speciesMapper(species)]
     },
     film: async (root, args, context, info) => {
+      ga('GraphQL Query', 'Film GraphQL Query')
       const film = await swapi.films(args.id)
       if (args.id === null) {
         return film.map(filmMapper)
