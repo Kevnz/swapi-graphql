@@ -10,6 +10,7 @@ const nullCheck = (entity, mapper) => {
   return mapper(entity)
 }
 const personMapper = person => {
+  if (!person) return
   if (!person.url) return
   return {
     id: parser(person.url),
@@ -31,16 +32,32 @@ const personMapper = person => {
   }
 }
 
+const fauxPlanet = {
+  id: 0,
+  name: 'N/A',
+  diameter: 'N/A',
+  population: 'N/A',
+  terrain: 'N/A',
+  orbitalPeriod: 'N/A',
+  climate: 'N/A',
+  rotationPeriod: 'N/A',
+  surfaceWater: 'N/A',
+  gravity: 'N/A',
+  urls: {
+    residents: null,
+    films: null,
+  },
+}
 const planetMapper = planet => {
-  if (!planet.url) return
+  if (!planet || !planet.url) return
   return {
     id: parser(planet.url),
     name: planet.name,
     diameter: planet.diameter,
-    population: planet.hair_color,
-    terrain: planet.mass,
+    population: planet.population,
+    terrain: planet.terrain,
     orbitalPeriod: planet.orbital_period,
-    climate: planet.skin_color,
+    climate: planet.climate,
     rotationPeriod: planet.rotation_period,
     surfaceWater: planet.surface_water,
     gravity: planet.gravity,
@@ -141,6 +158,11 @@ const loadAndMap = async (urls, mapper) => {
 const planetsResolver = async (root, args, context, info) => {
   return loadAndMap(root.urls.planets, planetMapper)
 }
+const homeworldResolver = async url => {
+  const id = parser(url)
+  const p = await swapi.planets(id)
+  return planetMapper(p)
+}
 const vehiclesResolver = async (root, args, context, info) => {
   return loadAndMap(root.urls.vehicles, vehicleMapper)
 }
@@ -188,6 +210,19 @@ const resolvers = {
     pilots: pilotsResolver,
     films: filmsResolver,
   },
+  Species: {
+    homeworld: async (root, args, context, info) => {
+      if (!root.urls) {
+        return null
+      }
+      if (!root.urls.homeworld) {
+        return fauxPlanet
+      }
+      return homeworldResolver(root.urls.homeworld)
+    },
+
+    films: filmsResolver,
+  },
   Query: {
     person: async (root, args, context, info) => {
       const person = await swapi.people(args.id)
@@ -211,11 +246,18 @@ const resolvers = {
       return [vehicleMapper(vehicle)]
     },
     starship: async (root, args, context, info) => {
-      const starship = await swapi.starship(args.id)
+      const starship = await swapi.starships(args.id)
       if (args.id === null) {
         return starship.map(starshipMapper)
       }
       return [starshipMapper(starship)]
+    },
+    species: async (root, args, context, info) => {
+      const species = await swapi.species(args.id)
+      if (args.id === null) {
+        return species.map(speciesMapper)
+      }
+      return [speciesMapper(species)]
     },
     film: async (root, args, context, info) => {
       const film = await swapi.films(args.id)
