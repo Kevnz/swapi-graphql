@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import ReactDOM from 'react-dom'
+import { useState, useEffect } from 'react'
 function useQuery(url, query, variables = {}, initialState = {}, options = {}) {
   let defaultOptions = {
     method: 'POST',
@@ -36,7 +35,6 @@ function useQuery(url, query, variables = {}, initialState = {}, options = {}) {
         return resp.json()
       })
       .then(function(res) {
-        console.log('res json')
         let obj
         obj = {
           response: res.data,
@@ -48,7 +46,7 @@ function useQuery(url, query, variables = {}, initialState = {}, options = {}) {
         fetchState({ success: false, error: err })
       })
   }, options.runWhenSpecificPropsChanges)
-  console.log('fetchData', fetchData)
+
   let { success, error, response } = { ...fetchData }
   return {
     data: response || initialState,
