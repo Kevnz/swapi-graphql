@@ -24,8 +24,6 @@ const Characters = () => {
     { data: { film: [] } }
   )
 
-  console.log('render data', data)
-
   if (loading) {
     return <Loading />
   }
@@ -43,7 +41,7 @@ const Characters = () => {
     })
   return (
     <main>
-      <h3>Films from the Star Wars API</h3>
+      <h3>Characters from the Star Wars GraphQL API</h3>
       {people}
     </main>
   )
