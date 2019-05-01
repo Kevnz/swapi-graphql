@@ -14,3 +14,8 @@ a.button {
   margin-top: 1rem;
 
 }
+
+nav {
+  display: inline-block;
+  margin-right: 1rem;
+}
