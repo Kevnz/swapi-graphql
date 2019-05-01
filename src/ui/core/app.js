@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useRef } from 'react'
 import { Link } from '@reach/router'
-import useOutsideClick from '../tools/use-click-outside'
+import useClickOutside from '../tools/use-click-outside'
 import Routes from './routes'
 
 const App = () => <Routes />
@@ -14,8 +14,8 @@ export default () => {
     setDDG(false)
     setDDR(false)
   }
-  useOutsideClick(navGQL, hideDropDowns)
-  useOutsideClick(navREST, hideDropDowns)
+  useClickOutside(navGQL, hideDropDowns)
+  useClickOutside(navREST, hideDropDowns)
 
   const NavLink = props => (
     <Link
