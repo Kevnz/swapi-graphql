@@ -15,7 +15,7 @@ const reducer = (state, action) => {
     case 'error':
       return {
         ...state,
-        data: null,
+        data: action.payload.data,
         error: action.payload.error,
         loading: false,
       }
@@ -32,9 +32,14 @@ const useGraphQL = function(query, variables) {
   })
   const fetchQuery = async variables => {
     dispatch({ type: 'get' })
-    const resp = await request('/graphql', query, variables)
-    const data = resp
-    dispatch({ type: 'success', payload: { data } })
+    try {
+      const resp = await request('/graphql', query, variables)
+      const data = resp
+      dispatch({ type: 'success', payload: { data } })
+    } catch (err) {
+      const { data, errors } = err.response
+      dispatch({ type: 'error', payload: { data, errors } })
+    }
   }
   const holder = Object.keys(variables).map(key => variables[key])
 
