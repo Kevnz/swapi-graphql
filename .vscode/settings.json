@@ -1,9 +1,6 @@
 {
   "files.autoSaveDelay": 800,
   "css.validate": false,
-  "less.validate": false,
-  "scss.validate": false,
-  "stylelint.enable": true,
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": true,
   "[javascript]": {
