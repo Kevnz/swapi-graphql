@@ -1,6 +1,7 @@
 const DataLoader = require('dataloader')
 const { mapper } = require('@kev_nz/async-tools')
 const swapi = require('../utils/swapi')
+const ga = require('../utils/ga')
 const parser = url => {
   const p = url.split('/')
   p.pop()
@@ -189,6 +190,7 @@ module.exports = [
     path: '/api/characters/{id?}',
     config: {
       handler: async (request, h) => {
+        ga('REST Call', 'Characters REST Call')
         if (doesNotHaveParams(request.params)) {
           const person = await swapi.people()
           const people = person.map(personMapper)
@@ -213,6 +215,7 @@ module.exports = [
     path: '/api/films/{id?}',
     config: {
       handler: async (request, h) => {
+        ga('REST Call', 'Films REST Call')
         if (doesNotHaveParams(request.params)) {
           const film = await swapi.films()
           return film.map(filmMapper)
@@ -227,6 +230,7 @@ module.exports = [
     path: '/api/films/{id}/characters',
     config: {
       handler: async (request, h) => {
+        ga('REST Call', 'Characters REST Sub Call')
         const film = await swapi.films(request.params.id)
         const mappedFilm = filmMapper(film)
         const full = await charactersResolver(mappedFilm)
@@ -245,6 +249,7 @@ module.exports = [
     path: '/api/films/{id}/vehicles',
     config: {
       handler: async (request, h) => {
+        ga('REST Call', 'Vehicles REST Sub Call')
         const film = await swapi.films(request.params.id)
         const mappedFilm = filmMapper(film)
         return vehiclesResolver(mappedFilm)
@@ -256,6 +261,7 @@ module.exports = [
     path: '/api/films/{id}/starships',
     config: {
       handler: async (request, h) => {
+        ga('REST Call', 'Starships REST Sub Call')
         const film = await swapi.films(request.params.id)
         const mappedFilm = filmMapper(film)
         return starshipsResolver(mappedFilm)
@@ -278,6 +284,8 @@ module.exports = [
     path: '/api/planets/{id?}',
     config: {
       handler: async (request, h) => {
+        ga('REST Call', 'Planets REST Call')
+
         const planet = await swapi.planets(request.params.id)
         if (doesNotHaveParams(request.params)) {
           return planet.map(planetMapper)
@@ -291,6 +299,7 @@ module.exports = [
     path: '/api/vehicles/{id?}',
     config: {
       handler: async (request, h) => {
+        ga('REST Call', 'Vehicles REST Call')
         if (doesNotHaveParams(request.params)) {
           const vehicle = await swapi.vehicles()
           return vehicle.map(vehicleMapper)
@@ -305,6 +314,7 @@ module.exports = [
     path: '/api/starships/{id?}',
     config: {
       handler: async (request, h) => {
+        ga('REST Call', 'Starships REST Call')
         if (doesNotHaveParams(request.params)) {
           const starship = await swapi.starships()
           return starship.map(starshipMapper)
@@ -319,6 +329,7 @@ module.exports = [
     path: '/api/species/{id?}',
     config: {
       handler: async (request, h) => {
+        ga('REST Call', 'Species REST Call')
         if (doesNotHaveParams(request.params)) {
           const species = await swapi.species()
           const all = species.map(speciesMapper)
