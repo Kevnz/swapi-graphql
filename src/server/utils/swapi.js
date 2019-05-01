@@ -22,21 +22,21 @@ const redis = new Redis(redisConfig)
 
 const get = async url => {
   const fromCache = await redis.get(url)
-  if (fromCache !== null) return JSON.parse(fromCache)
+  if (fromCache) return JSON.parse(fromCache)
 
   const resp = await r2.get(url).json
+
   await redis.set(url, JSON.stringify(resp))
   return resp
 }
 const bulkGet = async url => {
   const fromCache = await redis.get(url)
-  if (fromCache !== null) return JSON.parse(fromCache)
+  if (fromCache) return JSON.parse(fromCache)
 
   const resp = await r2.get(url).json
   const results = resp.results
   mapper(results, async item => {
     const itemUrl = item.url
-    console.log('itemurl', itemUrl)
     await redis.set(itemUrl, JSON.stringify(item))
     return item
   })
@@ -67,9 +67,10 @@ module.exports = {
       const planets = await mapper(pages, page =>
         bulkGet(`${base}planets/?format=json&page=${page}`)
       )
+
       return [].concat(...planets.map(p => p.results))
     }
-    return get(`${base}planets/${id}/`)
+    return get(`${base}planets/${id}?format=json`)
   },
   starships: async id => {
     if (id == null) {
@@ -105,7 +106,6 @@ module.exports = {
     return get(`${base}species/${id}/`)
   },
   vehicles: async id => {
-    console.log('vehicle id', id)
     if (id == null) {
       const pages = Array(4)
         .fill(0)
