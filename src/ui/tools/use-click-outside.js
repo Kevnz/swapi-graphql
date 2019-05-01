@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react'
 
-export default function useOutsideClick(ref, handler = e => {}, when = true) {
-  function handle(e) {
+const useOutsideClick = (ref, handler = e => {}, when = true) => {
+  const handle = e => {
     if (ref && ref.current && !ref.current.contains(e.target)) {
       handler(e)
     }
@@ -19,3 +19,4 @@ export default function useOutsideClick(ref, handler = e => {}, when = true) {
 }
 
 export { useOutsideClick }
+export default useOutsideClick

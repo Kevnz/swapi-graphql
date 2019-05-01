@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useRef } from 'react'
 import { Link } from '@reach/router'
-import useOutsideClick from '../tools/use-outside-click'
+import useOutsideClick from '../tools/use-click-outside'
 import Routes from './routes'
 
 const App = () => <Routes />
