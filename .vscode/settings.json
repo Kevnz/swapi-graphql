@@ -7,9 +7,9 @@
     "editor.formatOnSave": false
   },
   "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#28ad00",
-    "titleBar.inactiveBackground": "#34ea2ecc",
-    "titleBar.activeForeground": "#FFF",
+    "titleBar.activeBackground": "#77b6ff",
+    "titleBar.inactiveBackground": "#008aadcc",
+    "titleBar.activeForeground": "#000",
     "titleBar.inactiveForeground": "#FFFFFFCC"
   },
   "vsicons.presets.jsOfficial": true,
