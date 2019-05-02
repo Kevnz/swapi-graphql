@@ -9,6 +9,12 @@
     "cross-env NODE_ENV=development webpack-dev-server --config ./src/webpack/dev.config.js --hot ",
     "nodemon ./src/server/index.js"
   ],
+  "cleanupdev": [
+    "docker-compose -f ./docker/dev/docker-compose.yml down"
+  ],
+  "postdev": [
+    "docker-compose -f ./docker/dev/docker-compose.yml down"
+  ],
   "test": "jest --config=jest.config.js --detectOpenHandles --forceExit --testPathPattern='(src).*(__tests__).*.test.js'",
   "lint": "eslint ./src",
   "watch": "npm-run-all --parallel dev:**",
@@ -19,5 +25,10 @@
   "build": "webpack --config ./src/webpack/prod.config.js --mode production",
   "start": "node ./src/server/index.js",
   "storybook": "start-storybook -p 6006",
-  "build-storybook": "build-storybook"
+  "build-storybook": "build-storybook",
+  "prething": "node ./src/scripts/echo.js prething",
+  "thing": "node ./src/scripts/echo.js thing",
+  "postthing": "node ./src/scripts/echo.js postthing",
+  "thunk": "node ./src/scripts/echo.js thunk",
+  "wookie": "node ./src/scripts/wookie.js"
 }
