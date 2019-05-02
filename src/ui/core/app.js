@@ -14,8 +14,8 @@ export default () => {
     setDDG(false)
     setDDR(false)
   }
-  useClickOutside(navGQL, hideDropDowns)
-  useClickOutside(navREST, hideDropDowns)
+  useClickOutside(navGQL, hideDropDowns, ddG)
+  useClickOutside(navREST, hideDropDowns, ddR)
 
   const NavLink = props => (
     <Link
