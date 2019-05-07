@@ -7,10 +7,14 @@
     "editor.formatOnSave": false
   },
   "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#77b6ff",
-    "titleBar.inactiveBackground": "#008aadcc",
-    "titleBar.activeForeground": "#000",
-    "titleBar.inactiveForeground": "#FFFFFFCC"
+    "titleBar.activeBackground": "#e10098",
+    "titleBar.inactiveBackground": "#e10098cc",
+    "titleBar.activeForeground": "#ffffff",
+    "titleBar.inactiveForeground": "#FFFFFFCC",
+    "titleBar.border": "#33373f",
+    "activityBar.background": "#e10098",
+    "activityBar.foreground": "#fff",
+    "activityBarBadge.foreground": "#fff",
   },
   "vsicons.presets.jsOfficial": true,
   "vsicons.presets.jsonOfficial": true,
