@@ -1,9 +1,9 @@
 import React from 'react'
-import useQuery from '../tools/use-graphql'
+import { useGraphQL } from '@brightleaf/react-hooks'
 import Starship from '../components/starship'
 import Loading from '../components/loading'
 const Starships = () => {
-  const { data, loading, error } = useQuery(
+  const { data, loading, error } = useGraphQL(
     `{
       starship(id: null) {
         id,

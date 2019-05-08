@@ -1,9 +1,9 @@
 import React from 'react'
-import useQuery from '../tools/use-graphql'
+import { useGraphQL } from '@brightleaf/react-hooks'
 import Loading from '../components/loading'
 import Species from '../components/species'
 const SpeciesFeature = () => {
-  const { data, loading, error } = useQuery(
+  const { data, loading, error } = useGraphQL(
     `{
       species(id: null) {
         id,
@@ -28,7 +28,9 @@ const SpeciesFeature = () => {
   if (loading) {
     return <Loading />
   }
-
+  if (error) {
+    return <div>Error</div>
+  }
   const allSpecies = data.species
     .sort((a, b) => {
       return a.name > b.name ? 1 : -1

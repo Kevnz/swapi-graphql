@@ -1,10 +1,10 @@
 import React from 'react'
-import useQuery from '../tools/use-graphql'
+import { useGraphQL } from '@brightleaf/react-hooks'
 import Film from '../components/film'
 import Vehicle from '../components/vehicle'
 import Loading from '../components/loading'
 const Films = () => {
-  const { data, loading, error } = useQuery(
+  const { data, loading, error } = useGraphQL(
     `{
       film(id: null) {
         title
