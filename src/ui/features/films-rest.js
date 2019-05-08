@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { mapper, each } from '@kev_nz/async-tools'
-import useGet from '../tools/use-get'
+import useGet from '@brightleaf/react-hooks'
 import Film from '../components/film'
 import Characters from '../components/rest/characters'
 import Loading from '../components/loading'

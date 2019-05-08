@@ -1,5 +1,5 @@
 import React from 'react'
-import useGet from '../tools/use-get'
+import useGet from '@brightleaf/react-hooks'
 import Starship from '../components/starship'
 import Loading from '../components/loading'
 

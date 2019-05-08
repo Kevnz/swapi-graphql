@@ -1,7 +1,7 @@
 import React from 'react'
+import useGet from '@brightleaf/react-hooks'
 import Loading from '../components/loading'
 import Species from '../components/species'
-import useGet from '../tools/use-get'
 const SpeciesFeature = () => {
   const { data, loading, error } = useGet(`/api/species/`)
 
