@@ -12,9 +12,10 @@
     "titleBar.activeForeground": "#ffffff",
     "titleBar.inactiveForeground": "#FFFFFFCC",
     "titleBar.border": "#33373f",
-    "activityBar.background": "#e10098",
-    "activityBar.foreground": "#fff",
+    "activityBar.foreground": "#e10098",
+    "activityBar.background": "#33373f",
     "activityBarBadge.foreground": "#fff",
+    "tab.activeBorder": "#e10098"
   },
   "vsicons.presets.jsOfficial": true,
   "vsicons.presets.jsonOfficial": true,
