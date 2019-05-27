@@ -1,6 +1,6 @@
 const r2 = require('r2')
 const Redis = require('ioredis')
-const mapper = require('./async/map')
+const { mapper } = require('@kev_nz/async-tools')
 const base = 'https://swapi.co/api/'
 /*
 const people = 'people/'
