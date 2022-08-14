@@ -7,15 +7,15 @@
     "editor.formatOnSave": false
   },
   "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#e10098",
-    "titleBar.inactiveBackground": "#e10098cc",
+    "titleBar.activeBackground": "#6492FC",
+    "titleBar.inactiveBackground": "#6492FCCC",
     "titleBar.activeForeground": "#ffffff",
     "titleBar.inactiveForeground": "#FFFFFFCC",
     "titleBar.border": "#33373f",
-    "activityBar.foreground": "#e10098",
+    "activityBar.foreground": "#6492FC",
     "activityBar.background": "#33373f",
     "activityBarBadge.foreground": "#fff",
-    "tab.activeBorder": "#e10098"
+    "tab.activeBorder": "#6492FC"
   },
   "vsicons.presets.jsOfficial": true,
   "vsicons.presets.jsonOfficial": true,
@@ -69,5 +69,8 @@
       "filename": true,
       "format": "svg"
     }
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
