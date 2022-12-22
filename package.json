@@ -46,7 +46,7 @@
     "inert": "^5.1.2",
     "ioredis": "^4.6.2",
     "isom": "^1.0.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "knex": "^0.16.3",
     "nodewikiaapi": "^2.0.2",
     "pg": "^7.8.0",
